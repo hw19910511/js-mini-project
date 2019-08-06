@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>homework</title>
+</head>
+<body>
+	<ul id="ul">
+		<li>第1段话</li>
+		<li>第2段话</li>
+		<li>第3段话</li>
+		<li>第4段话</li>
+		<li>第5段话</li>
+	</ul>
+</body>
+<script>
+	i = 1;
+	setInterval(function(){
+		ul = document.getElementById('ul');
+		li = ul.getElementsByTagName('li');
+		new_li = document.createElement('li');
+		new_li.innerHTML = '第'+i+'段话';
+		document.getElementById('ul').appendChild(new_li);
+		i++;
+		ul.removeChild(li[0]);
+		if(i > 5){
+			i = 1;
+		}
+	},1000);
+</script>
+</html>

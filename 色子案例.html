@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>弹性盒模型-色子案例</title>
+	<style type="text/css">
+	.container{
+	  display:flex;
+	  padding:10px;
+	  width:120px;
+	  height:120px;
+	  border:3px solid #ddd;
+	  border-radius:10%;
+	  background:#fff;
+	  box-shadow:3px 3px 3px 0px #999;
+	  margin:5px;
+	}
+	.item{
+	  width:30px; 
+	  height:30px;
+	  background:#999;
+	  border-radius:50%;
+	  box-shadow:1px 1px 2px 0px #999;
+	  /*margin:auto;*/
+	}
+	.one{
+	  justify-content:center;/*水平居中*/
+	  align-items:center;/*垂直居中*/
+	}
+	.two{
+	  justify-content:space-around;/*分散对齐*/
+	  align-items:center;/*垂直居中*/
+	}
+	.two1{
+	  flex-direction:column;/*方向垂直*/
+	  justify-content:space-around;/*分散对齐*/
+	  align-items:center;/*垂直居中*/
+	}
+	.three{
+	  flex-direction:column;/*方向垂直*/
+	  justify-content:space-around;/*分散对齐*/
+	   align-items:center;/*垂直居中*/
+	}
+	.three div:first-child{
+	   align-self:flex-start;
+	}
+	.three div:last-child{
+	   align-self:flex-end;
+	}
+	.four{
+	  flex-wrap:wrap;/*是否允许换行*/
+	}
+	.four .item{
+	  margin:7px;
+	}
+	.four1{
+	  flex-direction:column;/*方向垂直*/
+	  justify-content:space-around;/*分散对齐*/
+	}
+	.four1>div{
+	   display:flex;
+	   justify-content:space-around;/*分散对齐*/
+	}
+	.five{
+	  flex-direction:column;/*方向垂直*/
+	  justify-content:space-around;/*分散对齐*/
+	}
+	.five>div{
+	   display:flex;
+	   justify-content:space-around;/*分散对齐*/
+	}
+	.six{
+	  flex-direction:column;/*方向垂直*/
+	  justify-content:space-around;/*分散对齐*/
+	}
+	.six>div{
+	   display:flex;
+	   justify-content:space-around;/*分散对齐*/
+	}
+	.six1{
+	  flex-direction:column;/*垂直对齐*/
+	  justify-content:space-around;/*分散对齐*/
+	}
+	.six1>div{
+	   display:flex;
+	   justify-content:space-around;/*分散对齐*/
+	}
+	</style>
+</head>
+<body>
+   <div class="container six1">
+	   <div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>	
+	   </div>
+       <div>
+		 <div class="item"></div>	
+         <div class="item"></div>	
+         <div class="item"></div>			 
+	   </div>	   	   
+	</div>
+    <div class="container six">
+	   <div>
+		<div class="item"></div>
+		<div class="item"></div>
+	   </div>
+       <div>
+		<div class="item"></div>	
+         <div class="item"></div>			
+	   </div>	   
+	   <div>
+		<div class="item"></div>
+		<div class="item"></div>
+	   </div>
+	</div>
+     <div class="container five">
+	   <div>
+		<div class="item"></div>
+		<div class="item"></div>
+	   </div>
+       <div>
+		<div class="item"></div>		
+	   </div>	   
+	   <div>
+		<div class="item"></div>
+		<div class="item"></div>
+	   </div>
+	</div>
+    <div class="container four1">
+	   <div>
+		<div class="item"></div>
+		<div class="item"></div>
+	   </div>	
+	   <div>
+		<div class="item"></div>
+		<div class="item"></div>
+	   </div>
+	</div>
+    <div class="container four">
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+	</div>
+    <div class="container three">
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+	</div>
+    <div class="container two1">
+		<div class="item"></div>
+		<div class="item"></div>
+	</div>
+    <div class="container two">
+		<div class="item"></div>
+		<div class="item"></div>
+	</div>
+	<div class="container one">
+		<div class="item"></div>
+	</div>
+	
+</body>
+</html>

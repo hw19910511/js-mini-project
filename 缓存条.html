@@ -1,0 +1,18 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<title>碰撞缓冲效果的导航条</title> 
+<style type="text/css"> 
+* { padding: 0; margin: 0; } li { list-style: none; } body { background: #fff; } ul { width: 202px; margin: 40px auto 0; position: relative; } li { width: 200px; height: 30px; line-height: 30px; padding-left: 10px; border: 1px solid #ccc; border-left: 3px solid #666; font-size: 14px; color: #333; margin-bottom: 5px; position: relative; z-index: 2; } a { color: #333; text-decoration: none; } .active { font-weight: bold; background: #fff0f0; } #bar { width: 10px; padding-left: 0; background: #cc6699; border: 1px solid #cc6699; position: absolute; top: 0; left: -14px; z-index: 3; } </style> 
+<script> 
+var obj = null; var aLis = null; var oBar = null; var iTime = null; var iSpeed = 0; var iAcc = 3; var onOff = 0; var iPrev = 0; var iNext = 0; function goTime() {  for(var i = 0; i < aLis.length; i+=1)  {   if(aLis[i] === this)   {    var iTarget = (aLis[0].offsetHeight + 5) * i;    iNext = i;    onOff = iNext - iPrev;    if(iTime)    {     clearInterval(iTime);    }    if(onOff>=0)    {     iTime = setInterval("elasticity("+ iTarget +")",35);    }    else   {     iTime = setInterval("postpone("+ iTarget +")",35);    }    iPrev = iNext;   }   aLis[i].className="";   this.className="active";  } } function elasticity(target) {  var top = oBar.offsetTop;  iSpeed+=iAcc;  top += iSpeed;  if(top >= target)  {   iSpeed*=-0.7;   if(Math.abs(iSpeed)<=iAcc)   {    clearInterval(iTime);    iTime=null;   }   top=target;  }  oBar.style.top = top + "px"; } function postpone(target) {  if(oBar.offsetTop===target)  {   clearInterval(iTime);   iTime=null;  }  else {   iSpeed = (target - oBar.offsetTop)/4;   oBar.style.top = oBar.offsetTop + iSpeed + "px";  } } window.onload = function(){  obj = document.getElementById("nav");  aLis = obj.getElementsByTagName("li");  oBar = document.getElementById("bar");  for(var i = 0; i < aLis.length; i+=1)  {   if(aLis[i].id!="bar")   {    aLis[i].onmouseover = goTime;   }  } }; 
+</script> 
+</head> 
+<body> 
+<ul id="nav">  
+<li class="active"><a href="#">首页</a></li>  
+<li><a href="#">脚本之家</a></li>  
+<li><a href="#">妙味课程</a></li> 
+ <li><a href="#">联系方式</a></li>  
+ <li id="bar"></li>
+ </ul> 
+</body> 
+</html> 

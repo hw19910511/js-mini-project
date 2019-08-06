@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title></title>
+	<style type="text/css">
+	 ul li{list-style:none;}
+	 .title p{width:200px;height:50px;background-color:red;}
+	 
+	</style>
+	<script type="text/javascript" src="jquery-1.10.2.js"></script>
+</head>
+<body>
+    
+	<ul>
+		<li class="title">
+		<p>JQuery</p>
+		 <ul>
+		  	<li>Javascript</li>
+		  	<li>JQuery</li>
+		  	<li>HTML5</li>
+		  	<li>web前端</li>
+		  </ul>
+		
+		</li>
+		 
+		<li class="title">
+		     <p>俄罗斯方块</p>
+	          <ul>
+		        <li>俄罗斯方块1</li>
+		        <li>俄罗斯方块2</li>
+		       <li>俄罗斯方块3</li>
+	           </ul>
+		</li>
+		 
+		<li class="title">
+		<p>工具</p>
+		<ul>
+		 	<li>notepad++</li>
+		 	<li>subline Text</li>
+		 	<li>Editplus</li>
+		 </ul>
+		
+		</li>
+		
+	</ul>
+	<script type="text/javascript">
+	
+	 $(".title").hover(function(){
+	   $(this).children('ul').stop().slideDown(500);
+	 },
+	function(){
+	   $(".title ul").stop().slideUp(500);
+	 })
+	</script>
+</body>
+</html>

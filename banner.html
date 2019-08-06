@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>banner</title>
+	<style>
+	/* 第一步 */
+	/* 先把一些默认样式去除掉 */
+	*{
+		padding: 0;
+		margin: 0;
+		list-style: none;
+	}
+	/* 给整个图片轮播定一个宽高，形成一个独立的空间，以免干扰到别的样式 */
+	#banner{
+		margin: 0 auto;		/* 居中 */
+		width: 500px;
+		height: 350px;
+		position: relative; /* 接下来我们需要把按钮弄到图片的上面，所以需要用到定位，这里是使用定位的规则（要给某一个标签定位就一定要给他的上一级标签（也就是父标签一个相对定位），给自己一个绝对定位 */
+		
+	}
+	#box{
+		width: 500px;		/* 给图片的显示区域定一个宽高，作用和上面的 banner一样 */
+		height: 350px;
+		overflow: hidden;	/* 如果是多张图片的话。有些图片就会被挤出这个图片轮播区域，所以我们需要把被挤出去的图片隐藏掉 */
+	}
+	#box img{
+		width: 500px;		/* 为了防止图片的大小不一致，我们预先统一图片的大小 */
+		height: 350px;
+	}
+	#controll{
+		position: absolute;	/* 这里是给按钮地位，上面父标签一定要相对定位，这里使用绝对定位 */
+		/*top: 100px;*/		/* 这里指距离顶部多大距离，下面是距离左边，其他的同理 */
+		/*left: 100px;*/
+		bottom: 4px;
+		right: 4px;
+	}
+	/* 为了美观我们设计下按钮的样式 */
+	#controll li{
+		color: #dedede;			/* 字体为白色 */
+		cursor: pointer;		/* 鼠标的形状改为掌心 */
+		float: left;			/* 让按钮都在同一行 */
+		font-family: "微软雅黑";/* 字体使用微软雅黑 */
+		padding: 4px 10px;		/* 这里把背景撑开 */
+		background: #7e7e7e;	/* 这里是背景 */
+		border-radius: 20px;	/* 这里把按钮的形状改成圆形 */
+		margin: 3px;			/* 把按钮分开，不要挤在一起 */
+	}
+	#controll li:hover{
+	
+	background:#0000ff;
+	}
+	</style>
+</head>
+<body>
+  <div id="banner">
+    <div id="box">
+      <img src="images/1.jpg"/>
+      <img src="images/2.jpg"/>
+      <img src="images/3.jpg"/>
+      <img src="images/4.jpg"/>
+      <img src="images/5.jpg"/>
+      <img src="images/6.jpg"/>
+    </div>
+  	<ul id="controll"></ul>
+  </div>
+  <script>
+ /*
+图片轮播[选项卡做法]思路：
+
+ */
+ function $(id){ return document.getElementById(id);}	//先定义一个函数，简化提取id的代码
+ function banner(){
+    var pic		= $("box").getElementsByTagName("img");//获取所有的图片   
+    var leng	= pic.length;		//获取图片的数量
+    var w		= 1;																//当前显示图片的索引，让程序知道当前显示的是哪一张图片，这样就可以预先知道下一张图片了。w++就可以了。
+    //第一步，搭建好这个图片轮播的大概外观，详细看style标签
+    //第二部, 根据图片的数量生成对应的按钮，一一对应
+    function createControll(position,length){
+    	for(var i = 1;i<length;i++){
+    		if(i==1){
+				position.innerHTML += '<li  style="color:#ffffff;">'+i+'</li>';
+    		}else{
+    			position.innerHTML += '<li>'+i+'</li>';
+    		}
+    	}
+    }
+    createControll($("controll"),leng);
+    var liList =  $("controll").getElementsByTagName("li");	/* 获取所有的按钮，在这里获取是因为按钮是动态生成的，所以，我们需要按钮生成以后才能获取 */
+    //第三步 让每个按钮控制一张图片的显示
+
+	for(var i = 0;i<liList.length;i++){		/* 分别给每个按钮操作，所以我们需要使用for来批量操作 */
+		liList[i].index = i;						/* 这里是因为外面的参数，无法直接在事件里面使用，所以我们使用属性来达到传参的目的，当然也可以不设置属性，使用innerHTML获取当前的索引也是可以的 */
+		//alert(liList[i].index);
+		liList[i]["onclick"] = function(){ 	/* 给传进来的每个按钮一个更换图片的事件 */
+			play(liList,this.index)				/* 这里使用了图片播放函数，第一个参数是所有的图片，第二个参数就是当前触发事件的这个按钮的index */
+			w = this.index;						/* 把当前显示的图片的索引记录下来，赋值给w */
+		}   
+	}
+	//把切换图片的功能封装成一个函数，这样方便我们后面对图片播放进行操作
+	function play(obj,i){
+		for(var n = 0;n<obj.length;n++){	/* 这里是对所有的图片进行操作，所以我们使用for循环来批量操作 */
+			if(n == i){								/* 判断这个图片的顺序位置如果和当前按钮的顺序位置对应，就让这张图片显示出来，其他的都隐藏掉，我们也可以给当前的按钮加点样式，和其他的按钮区分开来 */
+				pic[i].style.display	= 'block';
+				//obj[i].style.color		= "#ffffff";
+				//obj[i].style.background = "#0000ff";
+				/* 这里也可以写成className的形式，程序的实现千变万化，不用拘泥 */
+			}else{
+				pic[n].style.display	= 'none';
+				//obj[n].style.color		= "#dedede";
+				//obj[n].style.background = "#7e7e7e";
+			}
+		}
+	}
+	//让图片实现自动轮播
+	setInterval(function(){
+		play(liList,w);			//这里调用播放图片的函数
+		if(w<liList.length-1){	//这里需要判断下，索引w超出了图片的数量
+			w++;					//每播放一张图片，索引w就自增一下
+		}else{
+		 	w = 0					//如果索引w超过了图片列表的长度，就重新播放
+		}
+	},3000);					//图片自动播放的时间间隔
+}
+banner();
+  </script>
+</body>
+</html>
